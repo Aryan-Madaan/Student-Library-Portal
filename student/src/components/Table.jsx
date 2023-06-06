@@ -10,9 +10,9 @@ import {
   Box,
 } from "@mui/material";
 
-import studentData from "../data/studentDatabase.json";
 
-const BasicTable = () => {
+
+const BasicTable = ({studData}) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -26,7 +26,7 @@ const BasicTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {studentData.students.map((student) => (
+          {studData.map((student) => (
             <TableRow key={student.id}>
               <TableCell>{student.name}</TableCell>
               <TableCell>{student.id}</TableCell>
