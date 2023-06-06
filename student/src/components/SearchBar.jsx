@@ -20,7 +20,9 @@ const SearchBar = ({studentDetails}) => {
       return (
         student
         .name.toLowerCase()
-        .includes(searchField.toString().toLowerCase().trim())
+        .includes(searchField.toString().toLowerCase().trim())||student
+        .id
+        .startsWith(searchField.toString().trim())
       );
     }
   );
