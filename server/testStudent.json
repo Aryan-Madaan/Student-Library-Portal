@@ -1,0 +1,94 @@
+{
+  "students": [
+    {
+      "name": "John Smith",
+      "id": "2021001",
+      "email": "john.smith@example.com",
+      "phno": "555-123-4567"
+    },
+    {
+      "name": "Emily Johnson",
+      "id": "2021002",
+      "email": "emily.johnson@example.com",
+      "phno": "555-234-5678"
+    },
+    {
+      "name": "Michael Anderson",
+      "id": "2021003",
+      "email": "michael.anderson@example.com",
+      "phno": "555-345-6789"
+    },
+    {
+      "name": "Sophia Davis",
+      "id": "2021004",
+      "email": "sophia.davis@example.com",
+      "phno": "555-456-7890"
+    },
+    {
+      "name": "Jacob Wilson",
+      "id": "2021005",
+      "email": "jacob.wilson@example.com",
+      "phno": "555-567-8901"
+    },
+    {
+      "name": "Emma Thompson",
+      "id": "2021006",
+      "email": "emma.thompson@example.com",
+      "phno": "555-678-9012"
+    },
+    {
+      "name": "Liam Martinez",
+      "id": "2021007",
+      "email": "liam.martinez@example.com",
+      "phno": "555-789-0123"
+    },
+    {
+      "name": "Olivia Rodriguez",
+      "id": "2021008",
+      "email": "olivia.rodriguez@example.com",
+      "phno": "555-890-1234"
+    },
+    {
+      "name": "Noah Lee",
+      "id": "2021009",
+      "email": "noah.lee@example.com",
+      "phno": "555-901-2345"
+    },
+    {
+      "name": "Ava Harris",
+      "id": "2021010",
+      "email": "ava.harris@example.com",
+      "phno": "555-012-3456"
+    },
+    {
+      "name": "William Clark",
+      "id": "2021011",
+      "email": "william.clark@example.com",
+      "phno": "555-123-4567"
+    },
+    {
+      "name": "Isabella Walker",
+      "id": "2021012",
+      "email": "isabella.walker@example.com",
+      "phno": "555-234-5678"
+    },
+    {
+      "name": "James Turner",
+      "id": "2021013",
+      "email": "james.turner@example.com",
+      "phno": "555-345-6789"
+    },
+    {
+      "name": "Mia Hill",
+      "id": "2021014",
+      "email": "mia.hill@example.com",
+      "phno": "555-456-7890"
+    },
+    {
+      "name": "Benjamin Carter",
+      "id": "2021015",
+      "email": "benjamin.carter@example.com",
+      "phno": "555-567-8901"
+    }
+  ]
+}
