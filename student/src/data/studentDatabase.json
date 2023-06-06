@@ -1,0 +1,28 @@
+{
+  "students": [
+    {
+      "name": "John Smith",
+      "id": "123456789",
+      "email": "john.smith@example.com",
+      "phno": "123-456-7890"
+    },
+    {
+      "name": "Emma Johnson",
+      "id": "987654321",
+      "email": "emma.johnson@example.com",
+      "phno": "987-654-3210"
+    },
+    {
+      "name": "Michael Davis",
+      "id": "456789123",
+      "email": "michael.davis@example.com",
+      "phno": "456-789-1230"
+    },
+    {
+      "name": "Sophia Wilson",
+      "id": "321654987",
+      "email": "sophia.wilson@example.com",
+      "phno": "321-654-9870"
+    }
+  ]
+}
