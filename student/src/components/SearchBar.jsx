@@ -8,8 +8,6 @@ import Table from "./Table";
 import AddStudent from "./AddStudent";
 
 
-
-
 const SearchBar = ({studentDetails}) => {
 
   const [searchField, setSearchField] = useState("");
