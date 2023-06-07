@@ -1,6 +1,8 @@
 import { Button, Paper, Box, Grid, Typography } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {useLocation} from 'react-router-dom';
+
 
 const darkTheme = createTheme({ palette: { mode: "dark" } });
 const boxStyle = {
@@ -12,6 +14,16 @@ const boxStyle = {
 };
 
 const View = () => {
+  const location = useLocation()
+  const st = ""
+  try{
+    st = location.state.stud
+  }
+  catch(e)
+  {
+    return ("Sorry the webpage you are looking for is not available");
+  }
+  
   return (
     <Box
       my={4}
@@ -32,7 +44,7 @@ const View = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">Rishabh Barnwal</Typography>
+                    <Typography variant="h6">{st.name}</Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -44,7 +56,7 @@ const View = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">1234567890</Typography>
+                    <Typography variant="h6">{st.id}</Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -56,7 +68,7 @@ const View = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">rishabh1234@gmail.com</Typography>
+                    <Typography variant="h6">{st.email}</Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -68,7 +80,7 @@ const View = () => {
                 </Grid>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">1234-56-7890</Typography>
+                    <Typography variant="h6">{st.phno}</Typography>
                   </Box>
                 </Grid>
               </Grid>

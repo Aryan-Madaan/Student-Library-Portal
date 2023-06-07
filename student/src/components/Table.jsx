@@ -9,6 +9,7 @@ import {
   Button,
   Box,
 } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 
 
@@ -35,14 +36,18 @@ const BasicTable = ({studData}) => {
               <TableCell>
                 <Box display="flex" alignItems="center">
                   <Box marginRight={1}>
+                  <Link to="/view" state={{stud:student}}>
                     <Button size="small" variant="outlined" color="success">
                       View
                     </Button>
+                    </Link>
                   </Box>
                   <Box marginRight={1}>
+                    
                     <Button size="small" variant="outlined" color="primary">
                       Update
                     </Button>
+                    
                   </Box>
                   <Box>
                     <Button size="small" variant="outlined" color="error">
