@@ -1,7 +1,8 @@
 import { Button, Paper, Box, Grid, Typography } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {useLocation} from 'react-router-dom';
+import {useLocation,Link} from 'react-router-dom';
+
 
 
 const darkTheme = createTheme({ palette: { mode: "dark" } });
@@ -15,7 +16,7 @@ const boxStyle = {
 
 const View = () => {
   const location = useLocation()
-  const st = ""
+  var st = ""
   try{
     st = location.state.stud
   }
@@ -89,12 +90,16 @@ const View = () => {
         </Box>
       </ThemeProvider>
       <Box m={2}>
+      <Link to="/update" state={{stud:st}}>
         <Button sx={{ mx: 2 }} size="large" variant="outlined" color="primary">
           UPDATE
         </Button>
+        </Link>
+        <Link to="/delete" state={{stud:st}}>
         <Button sx={{ mx: 2 }} size="large" variant="outlined" color="error">
           DELETE
         </Button>
+        </Link>
       </Box>
     </Box>
   );

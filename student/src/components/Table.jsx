@@ -43,11 +43,11 @@ const BasicTable = ({studData}) => {
                     </Link>
                   </Box>
                   <Box marginRight={1}>
-                    
+                  <Link to="/update" state={{stud:student}}>
                     <Button size="small" variant="outlined" color="primary">
                       Update
                     </Button>
-                    
+                    </Link>
                   </Box>
                   <Box>
                     <Button size="small" variant="outlined" color="error">
