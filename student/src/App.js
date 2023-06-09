@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
@@ -25,10 +25,11 @@ function App() {
       <div>
         <Navbar />
       </div>
-      {loading ? (
+      {/* Set loading here */}
+      {false ? (
         <Loading />
       ) : (
-        <BrowserRouter>
+        <Router>
           <Routes>
             <Route
               path="/"
@@ -38,12 +39,14 @@ function App() {
                 </Container>
               }
             />
-            <Route path="/view" element={<View />} />
+            <Route path="/view" element={<View  />}   /> 
             <Route path="/login" element={<div></div>} />
             <Route path="/update" element={<Update />} />
             <Route path="/delete" element={<Delete />} />
+            <Route path="/error" element={<div></div>} />
+            <Route path="*" element={<Navigate to ="/" />}/>
           </Routes>
-        </BrowserRouter>
+        </Router>
       )}
     </div>
   );
