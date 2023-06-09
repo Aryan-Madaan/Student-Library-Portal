@@ -6,6 +6,7 @@ import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
 import View from "./components/View";
 import Update from "./components/Update";
+import Delete from "./components/Delete";
 
 import Container from "@mui/material/Container";
 
@@ -40,7 +41,7 @@ function App() {
             <Route path="/view" element={<View />} />
             <Route path="/login" element={<div></div>} />
             <Route path="/update" element={<Update />} />
-            <Route path="/delete" element={<div></div>} />
+            <Route path="/delete" element={<Delete />} />
           </Routes>
         </BrowserRouter>
       )}
