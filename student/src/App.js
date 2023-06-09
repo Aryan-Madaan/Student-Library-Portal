@@ -14,32 +14,49 @@ import Update from "./components/Update";
 
 import Container from "@mui/material/Container";
 
-import studentDatabase from "./data/studentDatabase.json";
+// import studentDatabase from "./data/studentDatabase.json";
 
 function App() {
   // implement a loader here
   const [loading, setLoading] = useState(true);
 
+  const [data, setData] = useState([]);
+
   useEffect(() => {
+    fetchData();
     setTimeout(() => setLoading(false), 3000);
+    // setLoading(false);
   }, [loading]);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/students');
+      // console.log(response)
+      const jsonData = await response.json();
+      // console.log(jsonData);
+      setData(jsonData);
+      // console.log(studentDatabase)
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
+    <Router>
     <div style={{ backgroundColor: "#111515", minHeight: "100vh" }}>
       <div>
         <Navbar />
       </div>
       {/* Set loading here */}
-      {false ? (
+      {loading ? (
         <Loading />
       ) : (
-        <Router>
+        
           <Routes>
             <Route
               path="/"
               element={
                 <Container maxWidth="xl">
-                  <SearchBar studentDetails={studentDatabase} />
+                  <SearchBar studentDetails={data} />
                 </Container>
               }
             />
@@ -49,9 +66,10 @@ function App() {
             <Route path="/error" element={<div></div>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </Router>
+        
       )}
     </div>
+    </Router>
   );
 }
 

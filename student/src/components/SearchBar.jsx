@@ -23,11 +23,11 @@ const SearchBar = ({ studentDetails }) => {
     searchField.toString().trim() === ""
       ? studentDetails.students
       : studentDetails.students.filter((student) => {
-          console.log(student.name);
+          // console.log(student.name);
           return (
             student.name
               .toLowerCase()
-              .includes(searchField.toString().toLowerCase().trim()) ||
+              .startsWith(searchField.toString().toLowerCase().trim()) ||
             student.id.startsWith(searchField.toString().trim())
           );
         });

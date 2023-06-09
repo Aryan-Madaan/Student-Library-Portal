@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button, Paper, Box, Grid, Typography } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate  } from "react-router-dom";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
@@ -33,13 +33,14 @@ const View = () => {
       setIsDelete2(false);
     }
   };
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   var st = "";
   try {
     st = location.state.stud;
   } catch (e) {
+    console.log(location.state)
     return "Sorry the webpage you are looking for is not available";
   }
 
@@ -108,17 +109,21 @@ const View = () => {
         </Box>
       </ThemeProvider>
       <Box m={2}>
-        <Link to="/update" state={{ stud: st }}>
           <Button
             sx={{ mx: 2 }}
             size="large"
             variant="outlined"
             color="primary"
             startIcon={<UpgradeIcon />}
+            onClick={()=>{
+              navigate('/update',{
+              state: { stud: st },
+              replace:true
+            });
+           }}
           >
             UPDATE
           </Button>
-        </Link>
         <Button
           sx={{ mx: 2 }}
           size="large"

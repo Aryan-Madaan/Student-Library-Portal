@@ -5,10 +5,11 @@ import {
   Toolbar,
   Box,
   Icon,
-  Link,
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import HomeButton from "./HomeButton";
+
 
 const darkTheme = createTheme({
   palette: {
@@ -22,11 +23,7 @@ const Navbar = () => {
       <Paper elevation={16}>
         <AppBar position="static" sx={{ bgcolor: "transparent" }}>
           <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography marginLeft={3} variant="h7" sx={{ color: "white" }}>
-              <Link href="/" style={{ textDecoration: "none", color: "white" }}>
-                HOME
-              </Link>
-            </Typography>
+            <HomeButton />
             <Paper
               elevation={1}
               sx={{ borderRadius: "10px", backgroundColor: "transparent" }}
