@@ -11,10 +11,13 @@ import {
 import { useState } from "react";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {useLocation,Link} from 'react-router-dom';
-import studentDatabase from "../data/studentDatabase.json";
-// import { Input } from '@mui/material';
 
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import CancelIcon from "@mui/icons-material/Cancel";
+
+import { useLocation, Link } from "react-router-dom";
+
+import studentDatabase from "../data/studentDatabase.json";
 
 const darkTheme = createTheme({ palette: { mode: "dark" } });
 
@@ -34,14 +37,12 @@ const containerStyle = {
 };
 
 const Update = () => {
-  const location = useLocation()
-  var st = ""
-  try{
-    st = location.state.stud
-  }
-  catch(e)
-  {
-    <div>ERROR READING STUDENT DATA</div>
+  const location = useLocation();
+  var st = "";
+  try {
+    st = location.state.stud;
+  } catch (e) {
+    <div>ERROR READING STUDENT DATA</div>;
   }
   const originalId = st.id;
   const [name, setName] = useState(st.name);
@@ -77,7 +78,6 @@ const Update = () => {
       }}
     >
       <ThemeProvider theme={darkTheme}>
-        
         <Box>
           <Paper sx={{ py: 0.5, px: 2, borderRadius: "10px" }}>
             <Paper sx={{ my: 2, py: 2 }} elevation={16}>
@@ -159,16 +159,43 @@ const Update = () => {
         </Box>
       </ThemeProvider>
       <Box m={2}>
-      <Link to="/view" state={{stud:{"name":name,"id":id,"phno": phno,"email":email }}}>
-        <Button sx={{ mx: 2 }} size="large" variant="outlined" color="primary" onClick={()=>{console.log(originalId);if(originalId!=null) {const idx = studentDatabase.students.findIndex(e => e.id == originalId); studentDatabase.students[idx].email = email;studentDatabase.students[idx].name = name;studentDatabase.students[idx].id = id; studentDatabase.students[idx].phno = phno;} }}>
-          UPDATE
-        </Button>
+        <Link
+          to="/view"
+          state={{ stud: { name: name, id: id, phno: phno, email: email } }}
+        >
+          <Button
+            sx={{ mx: 2 }}
+            size="large"
+            variant="outlined"
+            color="primary"
+            onClick={() => {
+              console.log(originalId);
+              if (originalId != null) {
+                const idx = studentDatabase.students.findIndex(
+                  (e) => e.id === originalId
+                );
+                studentDatabase.students[idx].email = email;
+                studentDatabase.students[idx].name = name;
+                studentDatabase.students[idx].id = id;
+                studentDatabase.students[idx].phno = phno;
+              }
+            }}
+            startIcon={<UpgradeIcon />}
+          >
+            UPDATE
+          </Button>
         </Link>
-        <Link to="/view" state={{stud:st}}>
-        <Button sx={{ mx: 2 }} size="large" variant="outlined" color="error">
-          CANCEL
-        </Button>
-</Link>
+        <Link to="/view" state={{ stud: st }}>
+          <Button
+            sx={{ mx: 2 }}
+            size="large"
+            variant="outlined"
+            color="error"
+            startIcon={<CancelIcon />}
+          >
+            CANCEL
+          </Button>
+        </Link>
       </Box>
     </Container>
   );

@@ -1,9 +1,14 @@
+import React, { useState } from "react";
+
 import { Button, Paper, Box, Grid, Typography } from "@mui/material";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {useLocation,Link} from 'react-router-dom';
+import { useLocation, Link } from "react-router-dom";
 
+import DeleteIcon from "@mui/icons-material/Delete";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
 
+import Delete from "./Delete";
 
 const darkTheme = createTheme({ palette: { mode: "dark" } });
 const boxStyle = {
@@ -15,16 +20,29 @@ const boxStyle = {
 };
 
 const View = () => {
-  const location = useLocation()
-  var st = ""
-  try{
-    st = location.state.stud
+  const [isDelete1, setIsDelete1] = useState(false);
+  const [isDelete2, setIsDelete2] = useState(false);
+
+  const deleteBtn = (event) => {
+    event.preventDefault();
+    if (isDelete1) {
+      setIsDelete2(true);
+      setIsDelete1(false);
+    } else {
+      setIsDelete1(true);
+      setIsDelete2(false);
+    }
+  };
+
+  const location = useLocation();
+
+  var st = "";
+  try {
+    st = location.state.stud;
+  } catch (e) {
+    return "Sorry the webpage you are looking for is not available";
   }
-  catch(e)
-  {
-    return ("Sorry the webpage you are looking for is not available");
-  }
-  
+
   return (
     <Box
       my={4}
@@ -90,16 +108,29 @@ const View = () => {
         </Box>
       </ThemeProvider>
       <Box m={2}>
-      <Link to="/update" state={{stud:st}}>
-        <Button sx={{ mx: 2 }} size="large" variant="outlined" color="primary">
-          UPDATE
-        </Button>
+        <Link to="/update" state={{ stud: st }}>
+          <Button
+            sx={{ mx: 2 }}
+            size="large"
+            variant="outlined"
+            color="primary"
+            startIcon={<UpgradeIcon />}
+          >
+            UPDATE
+          </Button>
         </Link>
-        <Link to="/delete" state={{stud:st}}>
-        <Button sx={{ mx: 2 }} size="large" variant="outlined" color="error">
+        <Button
+          sx={{ mx: 2 }}
+          size="large"
+          variant="outlined"
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={deleteBtn}
+        >
           DELETE
         </Button>
-        </Link>
+        {isDelete1 && <Delete />}
+        {isDelete2 && <Delete />}
       </Box>
     </Box>
   );

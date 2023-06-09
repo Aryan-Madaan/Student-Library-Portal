@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
 import View from "./components/View";
 import Update from "./components/Update";
-import Delete from "./components/Delete";
 
 import Container from "@mui/material/Container";
 
@@ -21,7 +25,7 @@ function App() {
   }, [loading]);
 
   return (
-    <div style={{ backgroundColor: "black", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#111515", minHeight: "100vh" }}>
       <div>
         <Navbar />
       </div>
@@ -39,12 +43,11 @@ function App() {
                 </Container>
               }
             />
-            <Route path="/view" element={<View  />}   /> 
+            <Route path="/view" element={<View />} />
             <Route path="/login" element={<div></div>} />
             <Route path="/update" element={<Update />} />
-            <Route path="/delete" element={<Delete />} />
             <Route path="/error" element={<div></div>} />
-            <Route path="*" element={<Navigate to ="/" />}/>
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Router>
       )}
