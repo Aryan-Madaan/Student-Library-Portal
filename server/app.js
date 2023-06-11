@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -11,6 +15,7 @@ const testStu = require("./testStudent.json");
 const testBook = require("./testBooks.json");
 
 const jsonParser = bodyParser.json();
+const dbUrl = process.env.DB_URL;
 
 // app.get("/students", (req, res, next) => {
 //   res.status(200).send(testStu);
@@ -43,7 +48,7 @@ const jsonParser = bodyParser.json();
 //   res.status(200).send(testStu);
 // });
 
-mongoose.connect("mongodb://localhost:27017/studentDatabase", {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   //useCreateIndex: true,

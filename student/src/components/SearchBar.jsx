@@ -21,8 +21,8 @@ const SearchBar = ({ studentDetails }) => {
 
   const filteredstudents =
     searchField.toString().trim() === ""
-      ? studentDetails.students
-      : studentDetails.students.filter((student) => {
+      ? studentDetails
+      : studentDetails.filter((student) => {
           // console.log(student.name);
           return (
             student.name

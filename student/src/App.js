@@ -36,7 +36,7 @@ function App() {
       const response = await fetch("http://localhost:8080/students");
       // console.log(response)
       const jsonData = await response.json();
-      // console.log(jsonData);
+      console.log(jsonData);
       setData(jsonData);
       // console.log(studentDatabase)
     } catch (error) {
