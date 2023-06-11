@@ -37,17 +37,17 @@ const darkTheme = createTheme({
 const BasicTable = ({ studData }) => {
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
-
-  const deleteBtn = (event) => {
-    event.preventDefault();
-    if (isDelete1) {
-      setIsDelete2(true);
-      setIsDelete1(false);
-    } else {
-      setIsDelete1(true);
-      setIsDelete2(false);
-    }
-  };
+  const [delstudent, setDelStudent] = useState([]);
+  // const deleteBtn = (event,student) => {
+  //   event.preventDefault();
+  //   if (isDelete1) {
+  //     setIsDelete2(true);
+  //     setIsDelete1(false);
+  //   } else {
+  //     setIsDelete1(true);
+  //     setIsDelete2(false);
+  //   }
+  // };
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -57,8 +57,8 @@ const BasicTable = ({ studData }) => {
         sx={{ backgroundColor: "transparent" }}
         className="Table"
       >
-        {isDelete1 && <Delete />}
-        {isDelete2 && <Delete />}
+        {isDelete1 && <Delete id={delstudent.id}/>}
+        {isDelete2 && <Delete id={delstudent.id}/>}
         <Table>
           <TableHead>
             <TableRow>
@@ -117,7 +117,17 @@ const BasicTable = ({ studData }) => {
                         size="medium"
                         variant="outlined"
                         color="error"
-                        onClick={deleteBtn}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setDelStudent(student)
+                          if (isDelete1) {
+                            setIsDelete2(true);
+                            setIsDelete1(false);
+                          } else {
+                            setIsDelete1(true);
+                            setIsDelete2(false);
+                          }}
+                        }
                       >
                         Delete
                       </Button>

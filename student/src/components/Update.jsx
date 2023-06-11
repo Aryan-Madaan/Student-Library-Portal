@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from 'axios';
 
 import { useState } from "react";
 
@@ -15,9 +16,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-import { useLocation, Link } from "react-router-dom";
+import { useLocation,useNavigate  } from "react-router-dom";
 
-import studentDatabase from "../data/studentDatabase.json";
+// import studentDatabase from "../data/studentDatabase.json"; 
 
 const darkTheme = createTheme({ palette: { mode: "light" } });
 
@@ -38,6 +39,19 @@ const containerStyle = {
 };
 
 const Update = () => {
+  const navigate = useNavigate();
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   id: '',
+  //   email: '',
+  //   phno:'',
+  // });
+
+  // const handleSubmit = (event) => {
+   
+
+  // };
+
   const location = useLocation();
   var st = "";
   try {
@@ -53,21 +67,26 @@ const Update = () => {
 
   const nameChangeHandler = (event) => {
     setName(event.target.value);
+    // setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const idChangeHandler = (event) => {
     setId(event.target.value);
+    // setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
+    // setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const phnoChangeHandler = (event) => {
     setPhno(event.target.value);
+    // setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   return (
+    // <form onSubmit={handleSubmit}>
     <Container
       maxWidth="md"
       sx={{
@@ -79,6 +98,7 @@ const Update = () => {
       }}
     >
       <ThemeProvider theme={darkTheme}>
+     
         <Box>
           <Paper
             sx={{
@@ -173,45 +193,59 @@ const Update = () => {
         </Box>
       </ThemeProvider>
       <Box m={2}>
-        <Link
+        {/* <Link
           to="/view"
           state={{ stud: { name: name, id: id, phno: phno, email: email } }}
-        >
+        > */}
           <Button
             sx={{ mx: 2 }}
             size="large"
             variant="outlined"
             color="primary"
-            onClick={() => {
+            onClick={(event) => {
               console.log(originalId);
-              if (originalId != null) {
-                const idx = studentDatabase.students.findIndex(
-                  (e) => e.id === originalId
-                );
-                studentDatabase.students[idx].email = email;
-                studentDatabase.students[idx].name = name;
-                studentDatabase.students[idx].id = id;
-                studentDatabase.students[idx].phno = phno;
-              }
+              event.preventDefault();
+
+              // Make the POST request to your API endpoint
+              axios.put(`http://localhost:8080/students/${id}`, { name: name, id: id, phno: phno, email: email })
+                .then((response) => {
+                  // console.log({ name: name, id: id, phno: phno, email: email }); 
+                  navigate('/view',{ 
+                    state: { stud: { name: name, id: id, phno: phno, email: email } },
+                    replace: true
+                   });// Handle the API response
+                })
+                .catch((error) => {
+                  console.error("error"); // Handle any error that occurs
+                });
             }}
             startIcon={<UpgradeIcon />}
           >
             UPDATE
           </Button>
-        </Link>
-        <Link to="/view" state={{ stud: st }}>
+        {/* </Link> */}
+        {/* <Link to="/view" state={{ stud: st }}> */}
           <Button
             sx={{ mx: 2 }}
             size="large"
             variant="outlined"
             color="error"
             startIcon={<CancelIcon />}
+            onClick={
+              (event) => {
+                navigate('/view',{ 
+                  state: { stud: st },
+                  replace:true
+                 });
+              }
+            }
           >
             CANCEL
           </Button>
-        </Link>
+        {/* </Link> */}
       </Box>
     </Container>
+    // </form>
   );
 };
 

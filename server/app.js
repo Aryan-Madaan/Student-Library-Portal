@@ -1,5 +1,8 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
+app.use(cors());
+
 const bodyParser = require("body-parser");
 
 const testStu = require("./testStudent.json");
@@ -13,7 +16,7 @@ app.get("/students", (req, res, next) => {
 
 app.post("/students", jsonParser, (req, res, next) => {
   testStu.students.push(req.body);
-  res.send(testStu);
+  res.send(req.body);
 });
 
 app.put("/students/:id", jsonParser, (req, res, next) => {

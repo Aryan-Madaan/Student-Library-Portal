@@ -7,6 +7,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BlockIcon from "@mui/icons-material/Block";
 
+import axios from "axios";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -22,11 +24,25 @@ const theme = createTheme({
   },
 });
 
-const Delete = () => {
+const Delete = ({ id }) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = (e) => {
     e.preventDefault();
+    setOpen(false);
+  };
+
+  const deleteStudent = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8080/students/${id}`
+      );
+      console.log(response.data);
+      // Handle response
+    } catch (error) {
+      console.error(error);
+      // Handle error
+    }
     setOpen(false);
   };
 
@@ -58,6 +74,7 @@ const Delete = () => {
               color="error"
               sx={{ m: "1rem" }}
               startIcon={<DeleteIcon />}
+              onClick={deleteStudent}
             >
               Confirm
             </Button>
