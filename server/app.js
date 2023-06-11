@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
+const studentRoutes = require("./routes/studentRoute");
+const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
 
@@ -10,36 +12,51 @@ const testBook = require("./testBooks.json");
 
 const jsonParser = bodyParser.json();
 
-app.get("/students", (req, res, next) => {
-  res.status(200).send(testStu);
+// app.get("/students", (req, res, next) => {
+//   res.status(200).send(testStu);
+// });
+
+// app.post("/students", jsonParser, (req, res, next) => {
+//   testStu.students.push(req.body);
+//   res.status(200).send(req.body);
+// });
+
+// app.put("/students/:id", jsonParser, (req, res, next) => {
+//   const { id } = req.params;
+//   const idx = testStu.students.findIndex((e) => e.id === id);
+//   if (idx != -1) {
+//     testStu.students.splice(idx, 1, req.body);
+//   } else {
+//     res.status(404).send("CANNOT FIND THE STUDENT");
+//   }
+//   res.status(200).send(testStu);
+// });
+
+// app.delete("/students/:id", (req, res, next) => {
+//   const { id } = req.params;
+//   const idx = testStu.students.findIndex((e) => e.id === id);
+//   if (idx != -1) {
+//     testStu.students.splice(idx, 1);
+//   } else {
+//     res.status(404).send("CANNOT FIND THE STUDENT");
+//   }
+//   res.status(200).send(testStu);
+// });
+
+mongoose.connect("mongodb://localhost:27017/studentDatabase", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  //useCreateIndex: true,
+  //useFindAndModify: false,
 });
 
-app.post("/students", jsonParser, (req, res, next) => {
-  testStu.students.push(req.body);
-  res.status(200).send(req.body);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Connection Error:"));
+db.once("open", () => {
+  console.log("Connected to MongoDB");
 });
 
-app.put("/students/:id", jsonParser, (req, res, next) => {
-  const { id } = req.params;
-  const idx = testStu.students.findIndex((e) => e.id === id);
-  if (idx != -1) {
-    testStu.students.splice(idx, 1, req.body);
-  } else {
-    res.status(404).send("CANNOT FIND THE STUDENT");
-  }
-  res.status(200).send(testStu);
-});
-
-app.delete("/students/:id", (req, res, next) => {
-  const { id } = req.params;
-  const idx = testStu.students.findIndex((e) => e.id === id);
-  if (idx != -1) {
-    testStu.students.splice(idx, 1);
-  } else {
-    res.status(404).send("CANNOT FIND THE STUDENT");
-  }
-  res.status(200).send(testStu);
-});
+app.use("/", studentRoutes);
 
 // app.get("/books", (req, res, next) => {
 //   res.send(testBook);
