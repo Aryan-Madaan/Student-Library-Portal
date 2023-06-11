@@ -13,13 +13,15 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import "./Table.css";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Delete from "./Delete";
 
 const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     error: {
       main: "#fa4343",
     },
@@ -49,27 +51,44 @@ const BasicTable = ({ studData }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <TableContainer component={Paper} elevation={12}>
+      <TableContainer
+        component={Paper}
+        elevation={12}
+        sx={{ backgroundColor: "transparent" }}
+        className="Table"
+      >
         {isDelete1 && <Delete />}
         {isDelete2 && <Delete />}
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>NAME</TableCell>
-              <TableCell>ID NUMBER</TableCell>
-              <TableCell>EMAIL</TableCell>
-              <TableCell>PHONE NUMBER</TableCell>
-              <TableCell>ACTION</TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>
+                NAME
+              </TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>ID NUMBER</TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>EMAIL</TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>
+                PHONE NUMBER
+              </TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>ACTION</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {studData.map((student) => (
               <TableRow key={student.id}>
-                <TableCell>{student.name}</TableCell>
-                <TableCell>{student.id}</TableCell>
-                <TableCell>{student.email}</TableCell>
-                <TableCell>{student.phno}</TableCell>
-                <TableCell>
+                <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
+                  {student.name}
+                </TableCell>
+                <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
+                  {student.id}
+                </TableCell>
+                <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
+                  {student.email}
+                </TableCell>
+                <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
+                  {student.phno}
+                </TableCell>
+                <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                   <Box display="flex" alignItems="center">
                     <Box marginRight={1}>
                       <Link to="/view" state={{ stud: student }}>

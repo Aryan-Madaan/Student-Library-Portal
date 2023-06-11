@@ -7,21 +7,31 @@ import {
   Icon,
   Link,
 } from "@mui/material";
+
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
-const darkTheme = createTheme({
+import "./Navbar.css";
+
+const lightTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
   },
 });
 
 const Navbar = () => {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Paper elevation={16}>
+    <ThemeProvider theme={lightTheme}>
+      <Paper elevation={16} sx={{ bgcolor: "transparent" }} className="Navbar">
         <AppBar position="static" sx={{ bgcolor: "transparent" }}>
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Toolbar
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              bgcolor: "transparent",
+            }}
+          >
             <Typography marginLeft={3} variant="h7" sx={{ color: "white" }}>
               <Link href="/" style={{ textDecoration: "none", color: "white" }}>
                 HOME

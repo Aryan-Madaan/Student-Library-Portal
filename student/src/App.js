@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+
+import "./App.css";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,11 +28,10 @@ function App() {
   }, [loading]);
 
   return (
-    <div style={{ backgroundColor: "#111515", minHeight: "100vh" }}>
-      <div>
+    <div style={{ minHeight: "100vh" }} className="App">
+      <div >
         <Navbar />
       </div>
-      {/* Set loading here */}
       {false ? (
         <Loading />
       ) : (

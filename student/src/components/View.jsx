@@ -10,13 +10,13 @@ import UpgradeIcon from "@mui/icons-material/Upgrade";
 
 import Delete from "./Delete";
 
-const darkTheme = createTheme({ palette: { mode: "dark" } });
+const darkTheme = createTheme({ palette: { mode: "light" } });
 const boxStyle = {
-  mx: 2,
+  px: 8,
   py: 1,
-  px: 2,
   fontSize: "1.5rem",
   whiteSpace: "nowrap",
+  color: "#c1c1c1",
 };
 
 const View = () => {
@@ -53,51 +53,65 @@ const View = () => {
     >
       <ThemeProvider theme={darkTheme}>
         <Box>
-          <Paper sx={{ py: 0.5, px: 2, borderRadius: "10px" }}>
-            <Paper sx={{ my: 2, py: 2 }} elevation={16}>
-              <Grid container pr={8}>
+          <Paper
+            sx={{
+              py: 0.5,
+              px: 2,
+              borderRadius: "10px",
+              backgroundColor: "transparent",
+            }}
+          >
+            <Paper
+              sx={{
+                my: 2,
+                py: 2,
+                backgroundColor: "transparent",
+              }}
+              elevation={16}
+            >
+              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">NAME</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">{st.name}</Typography>
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8}>
+              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">ID NUMBER</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">{st.id}</Typography>
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8}>
+              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">EMAIL</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">{st.email}</Typography>
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8}>
+              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">PHONE NUMBER</Typography>
                   </Box>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">{st.phno}</Typography>
                   </Box>

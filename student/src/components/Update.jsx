@@ -19,7 +19,7 @@ import { useLocation, Link } from "react-router-dom";
 
 import studentDatabase from "../data/studentDatabase.json";
 
-const darkTheme = createTheme({ palette: { mode: "dark" } });
+const darkTheme = createTheme({ palette: { mode: "light" } });
 
 const boxStyle = {
   mx: 4,
@@ -28,6 +28,7 @@ const boxStyle = {
   fontSize: "1.5rem",
   whiteSpace: "nowrap",
   display: "flex",
+  color: "#c1c1c1",
 };
 
 const containerStyle = {
@@ -79,8 +80,18 @@ const Update = () => {
     >
       <ThemeProvider theme={darkTheme}>
         <Box>
-          <Paper sx={{ py: 0.5, px: 2, borderRadius: "10px" }}>
-            <Paper sx={{ my: 2, py: 2 }} elevation={16}>
+          <Paper
+            sx={{
+              py: 0.5,
+              px: 2,
+              borderRadius: "10px",
+              backgroundColor: "transparent",
+            }}
+          >
+            <Paper
+              sx={{ my: 2, py: 2, backgroundColor: "transparent" }}
+              elevation={16}
+            >
               <Grid container pr={8} sx={containerStyle}>
                 <Grid item xs={4}>
                   <Box sx={boxStyle}>
@@ -95,7 +106,7 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={name}
                       onChange={nameChangeHandler}
-                      // inputProps={props}
+                      InputProps={{ style: { color: "#c1c1c1" } }}
                     />
                   </Box>
                 </Grid>
@@ -114,6 +125,7 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={id}
                       onChange={idChangeHandler}
+                      InputProps={{ style: { color: "#c1c1c1" } }}
                     />
                   </Box>
                 </Grid>
@@ -132,6 +144,7 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={email}
                       onChange={emailChangeHandler}
+                      InputProps={{ style: { color: "#c1c1c1" } }}
                     />
                   </Box>
                 </Grid>
@@ -150,6 +163,7 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={phno}
                       onChange={phnoChangeHandler}
+                      InputProps={{ style: { color: "#c1c1c1" } }}
                     />
                   </Box>
                 </Grid>
