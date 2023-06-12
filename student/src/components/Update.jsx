@@ -7,18 +7,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import axios from 'axios';
+import axios from "axios";
 
 import { useState } from "react";
+
+import "./Update.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-import { useLocation,useNavigate  } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-// import studentDatabase from "../data/studentDatabase.json"; 
+// import studentDatabase from "../data/studentDatabase.json";
 
 const darkTheme = createTheme({ palette: { mode: "light" } });
 
@@ -48,7 +50,6 @@ const Update = () => {
   // });
 
   // const handleSubmit = (event) => {
-   
 
   // };
 
@@ -98,7 +99,6 @@ const Update = () => {
       }}
     >
       <ThemeProvider theme={darkTheme}>
-     
         <Box>
           <Paper
             sx={{
@@ -111,6 +111,7 @@ const Update = () => {
             <Paper
               sx={{ my: 2, py: 2, backgroundColor: "transparent" }}
               elevation={16}
+              className="Update"
             >
               <Grid container pr={8} sx={containerStyle}>
                 <Grid item xs={4}>
@@ -197,51 +198,57 @@ const Update = () => {
           to="/view"
           state={{ stud: { name: name, id: id, phno: phno, email: email } }}
         > */}
-          <Button
-            sx={{ mx: 2 }}
-            size="large"
-            variant="outlined"
-            color="primary"
-            onClick={(event) => {
-              console.log(originalId);
-              event.preventDefault();
+        <Button
+          sx={{ mx: 2 }}
+          size="large"
+          variant="outlined"
+          color="primary"
+          onClick={(event) => {
+            console.log(originalId);
+            event.preventDefault();
 
-              // Make the POST request to your API endpoint
-              axios.put(`http://localhost:8080/students/${id}`, { name: name, id: id, phno: phno, email: email })
-                .then((response) => {
-                  // console.log({ name: name, id: id, phno: phno, email: email }); 
-                  navigate('/view',{ 
-                    state: { stud: { name: name, id: id, phno: phno, email: email } },
-                    replace: true
-                   });// Handle the API response
-                })
-                .catch((error) => {
-                  console.error("error"); // Handle any error that occurs
-                });
-            }}
-            startIcon={<UpgradeIcon />}
-          >
-            UPDATE
-          </Button>
+            // Make the POST request to your API endpoint
+            axios
+              .put(`http://localhost:8080/students/${id}`, {
+                name: name,
+                id: id,
+                phno: phno,
+                email: email,
+              })
+              .then((response) => {
+                // console.log({ name: name, id: id, phno: phno, email: email });
+                navigate("/view", {
+                  state: {
+                    stud: { name: name, id: id, phno: phno, email: email },
+                  },
+                  replace: true,
+                }); // Handle the API response
+              })
+              .catch((error) => {
+                console.error("error"); // Handle any error that occurs
+              });
+          }}
+          startIcon={<UpgradeIcon />}
+        >
+          UPDATE
+        </Button>
         {/* </Link> */}
         {/* <Link to="/view" state={{ stud: st }}> */}
-          <Button
-            sx={{ mx: 2 }}
-            size="large"
-            variant="outlined"
-            color="error"
-            startIcon={<CancelIcon />}
-            onClick={
-              (event) => {
-                navigate('/view',{ 
-                  state: { stud: st },
-                  replace:true
-                 });
-              }
-            }
-          >
-            CANCEL
-          </Button>
+        <Button
+          sx={{ mx: 2 }}
+          size="large"
+          variant="outlined"
+          color="error"
+          startIcon={<CancelIcon />}
+          onClick={(event) => {
+            navigate("/view", {
+              state: { stud: st },
+              replace: true,
+            });
+          }}
+        >
+          CANCEL
+        </Button>
         {/* </Link> */}
       </Box>
     </Container>

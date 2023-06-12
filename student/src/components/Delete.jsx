@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { Box, Button, Modal, Typography } from "@mui/material";
 
@@ -6,8 +7,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import BlockIcon from "@mui/icons-material/Block";
-
-import axios from "axios";
 
 const theme = createTheme({
   palette: {

@@ -35,7 +35,7 @@ const Navbar = () => {
           >
             <HomeButton />
             <Paper
-              elevation={1}
+              elevation={8}
               sx={{ borderRadius: "10px", backgroundColor: "transparent" }}
             >
               <Typography variant="h6" sx={{ color: "white" }} py={1} px={2}>
