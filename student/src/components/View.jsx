@@ -22,6 +22,8 @@ const boxStyle = {
 const View = () => {
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
+  const [delstudent, setDelStudent] = useState([]);
+
 
   const deleteBtn = (event) => {
     event.preventDefault();
@@ -144,12 +146,22 @@ const View = () => {
           variant="outlined"
           color="error"
           startIcon={<DeleteIcon />}
-          onClick={deleteBtn}
+          onClick={(event) => {
+            event.preventDefault();
+            setDelStudent(st);
+            if (isDelete1) {
+              setIsDelete2(true);
+              setIsDelete1(false);
+            } else {
+              setIsDelete1(true);
+              setIsDelete2(false);
+            }
+          }}
         >
           DELETE
         </Button>
-        {isDelete1 && <Delete />}
-        {isDelete2 && <Delete />}
+        {isDelete1 && <Delete id={delstudent.id}/>}
+        {isDelete2 && <Delete id={delstudent.id}/>}
       </Box>
     </Box>
   );

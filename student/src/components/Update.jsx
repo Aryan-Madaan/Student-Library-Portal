@@ -207,9 +207,9 @@ const Update = () => {
             console.log(originalId);
             event.preventDefault();
 
-            // Make the POST request to your API endpoint
+            // Make the PUT request to your API endpoint
             axios
-              .put(`http://localhost:8080/students/${id}`, {
+              .put(`${process.env.REACT_APP_NAME}/${id}`, {
                 name: name,
                 id: id,
                 phno: phno,

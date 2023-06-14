@@ -12,7 +12,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Table.css";
 
@@ -36,6 +36,7 @@ const theme = createTheme({
 });
 
 const BasicTable = ({ studData }) => {
+  const navigate = useNavigate();
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
   const [delstudent, setDelStudent] = useState([]);
@@ -105,26 +106,38 @@ const BasicTable = ({ studData }) => {
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Box display="flex" alignItems="center">
                       <Box marginRight={1}>
-                        <Link to="/view" state={{ stud: student }}>
                           <Button
                             size="medium"
                             variant="outlined"
                             color="success"
+                            onClick={()=>{
+                              navigate("/view", {
+                                state: {
+                                  stud: student,
+                                },
+                                replace: true,
+                              });
+                            }}
                           >
                             View
                           </Button>
-                        </Link>
                       </Box>
                       <Box marginRight={1}>
-                        <Link to="/update" state={{ stud: student }}>
                           <Button
                             size="medium"
                             variant="outlined"
                             color="primary"
+                           onClick={()=>{
+                              navigate("/view", {
+                                state: {
+                                  stud: student,
+                                },
+                                replace: true,
+                              });
+                            }}
                           >
                             Update
                           </Button>
-                        </Link>
                       </Box>
                       <Box>
                         <Button
@@ -141,7 +154,9 @@ const BasicTable = ({ studData }) => {
                               setIsDelete1(true);
                               setIsDelete2(false);
                             }
-                          }}
+                          }
+                          
+                        }
                         >
                           Delete
                         </Button>

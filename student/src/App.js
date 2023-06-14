@@ -17,6 +17,7 @@ import Update from "./components/Update";
 import Status from "./components/Status";
 
 import Container from "@mui/material/Container";
+import AddStudentPage from "./components/AddStudentPage";
 
 // import studentDatabase from "./data/studentDatabase.json";
 
@@ -24,33 +25,38 @@ function App() {
   // implement a loader here
   const [loading, setLoading] = useState(true);
 
-  const [data, setData] = useState([]);
 
+  
+
+  // const fetchData = useCallback( async () => {
+  //   var [mydata,err,error] = await FetchData();
+  //   if(err){
+  //     handleError();
+  //     console.log(error);
+  //   }
+  //   else{
+  //     setData(mydata);
+  //   }
+  // });
+
+
+  
   useEffect(() => {
-    fetchData();
+   
+    // console.log(data)
     setTimeout(() => setLoading(false), 3000);
     // setLoading(false);
   }, [loading]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:8080/students");
-      // console.log(response)
-      const jsonData = await response.json();
-      console.log(jsonData);
-      setData(jsonData);
-      // console.log(studentDatabase)
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+
   return (
     <Router>
       <div style={{ minHeight: "100vh" }} className="App">
         <div>
           <Navbar />
         </div>
-        {loading ? (
+        {false ? (
           <Loading />
         ) : (
           <Routes>
@@ -58,13 +64,14 @@ function App() {
               path="/"
               element={
                 <Container maxWidth="xl">
-                  <SearchBar studentDetails={data} />
+                  <SearchBar />
                 </Container>
               }
             />
             <Route path="/view" element={<View />} />
             <Route path="/login" element={<div></div>} />
             <Route path="/update" element={<Update />} />
+            <Route path="/add" element={<AddStudentPage />} />
             <Route path="/status" element={<Status />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

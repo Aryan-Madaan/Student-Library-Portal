@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+
+import axios from "axios";
 
 import { Paper, InputBase, IconButton, Box } from "@mui/material";
 
@@ -15,19 +17,41 @@ const theme = createTheme({
   },
 });
 
-const SearchBar = ({ studentDetails }) => {
+const SearchBar = () => {
+
+  const [data, setData] = useState([]);
+  
   const [searchField, setSearchField] = useState("");
   const [focus, setFocus] = useState(8);
+  
+  const fetchData = async () => {
+    try {
+      // console.log(process.env.REACT_APP_NAME);
+      const response = await axios.get(process.env.REACT_APP_NAME);
+      
+      // console.log(response.json())
+      // console.log(response.data);
+      const jsonData = response.data;
+      // console.log(jsonData)
+      setData(jsonData);
+      // console.log(studentDatabase)
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
+   fetchData();
+  }, );
   const filteredstudents =
-    searchField.toString().trim() === ""
-      ? studentDetails
-      : studentDetails.filter((student) => {
+    data===[]?null:searchField.toString().trim() === ""
+      ? data
+      : data.filter((student) => {
           // console.log(student.name);
           return (
             student.name
               .toLowerCase()
-              .startsWith(searchField.toString().toLowerCase().trim()) ||
+              .includes(searchField.toString().toLowerCase().trim()) ||
             student.id.startsWith(searchField.toString().trim())
           );
         });

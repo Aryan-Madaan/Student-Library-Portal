@@ -1,5 +1,6 @@
 import { Box, Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -10,10 +11,13 @@ const theme = createTheme({
 });
 
 const AddStudent = () => {
+  const navigate = useNavigate()
   return (
     <Box marginTop={4} marginRight={3}>
       <ThemeProvider theme={theme}>
-        <Button variant="outlined">+ ADD STUDENT</Button>
+        <Button variant="outlined" onClick={()=>{
+          navigate("/add");
+        }}>+ ADD STUDENT</Button>
       </ThemeProvider>
     </Box>
   );

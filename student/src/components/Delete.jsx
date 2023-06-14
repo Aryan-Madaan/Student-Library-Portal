@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import BlockIcon from "@mui/icons-material/Block";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -25,6 +26,8 @@ const theme = createTheme({
 
 const Delete = ({ id }) => {
   const [open, setOpen] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleClose = (e) => {
     e.preventDefault();
@@ -34,7 +37,7 @@ const Delete = ({ id }) => {
   const deleteStudent = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/students/${id}`
+        `${process.env.REACT_APP_NAME}/${id}`
       );
       console.log(response.data);
       // Handle response
@@ -43,6 +46,9 @@ const Delete = ({ id }) => {
       // Handle error
     }
     setOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+    }
   };
 
   return (
