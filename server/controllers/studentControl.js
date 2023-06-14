@@ -3,7 +3,8 @@ const Student = require("../models/studentModel");
 module.exports.getStudents = async (req, res, next) => {
   //const { page } = req.params;
   const students = await Student.find({});
-  console.log(JSON.stringify(students));
+  // console.log({students});
+  // res.status(200).send(`{"students":${students}}`);
   res.status(200).send(JSON.stringify(students));
 };
 
