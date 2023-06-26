@@ -9,24 +9,22 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
-import View from "./components/View";
 import Update from "./components/Update";
 import Status from "./components/Status";
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import View from "./components/View";
 
-import Container from "@mui/material/Container";
 import AddStudentPage from "./components/AddStudentPage";
+import Container from "@mui/material/Container";
 
 // import studentDatabase from "./data/studentDatabase.json";
 
 function App() {
   // implement a loader here
   const [loading, setLoading] = useState(true);
-
-
-  
 
   // const fetchData = useCallback( async () => {
   //   var [mydata,err,error] = await FetchData();
@@ -39,16 +37,11 @@ function App() {
   //   }
   // });
 
-
-  
   useEffect(() => {
-   
     // console.log(data)
     setTimeout(() => setLoading(false), 3000);
     // setLoading(false);
   }, [loading]);
-
-
 
   return (
     <Router>
@@ -69,7 +62,7 @@ function App() {
               }
             />
             <Route path="/view" element={<View />} />
-            <Route path="/login" element={<div></div>} />
+            <Route path="/login" element={<Login />} />
             <Route path="/update" element={<Update />} />
             <Route path="/add" element={<AddStudentPage />} />
             <Route path="/status" element={<Status />} />
