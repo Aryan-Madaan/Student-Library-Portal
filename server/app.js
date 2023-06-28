@@ -7,6 +7,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 const studentRoutes = require("./routes/studentRoute");
+const userRoutes = require("./routes/userRoute");
 const mongoose = require("mongoose");
 
 const bodyParser = require("body-parser");
@@ -30,7 +31,19 @@ db.once("open", () => {
   console.log("Connected to MongoDB");
 });
 
+process.on("unhandledRejection", (error) => {
+  console.log("unhandledRejection", error.message);
+});
+
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 app.use("/", studentRoutes);
+app.use("/", userRoutes);
 
 // app.get("/books", (req, res, next) => {
 //   res.send(testBook);
