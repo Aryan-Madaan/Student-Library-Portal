@@ -13,7 +13,7 @@ import { useState } from "react";
 
 import "./Update.css";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -39,6 +39,20 @@ const containerStyle = {
   justifyContent: "center",
   alignItems: "center",
 };
+
+const PaperContainer = styled(Paper)(({ theme }) => ({
+  paddingTop: "0.5rem",
+  paddingBottom: "0.5rem",
+  paddingLeft: "2rem",
+  paddingRight: "2rem",
+  borderRadius: "10px",
+  backgroundColor: "transparent",
+  backdropFilter: "blur(30px)",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+}));
 
 const Update = () => {
   const navigate = useNavigate();
@@ -100,20 +114,13 @@ const Update = () => {
     >
       <ThemeProvider theme={darkTheme}>
         <Box>
-          <Paper
-            sx={{
-              py: 0.5,
-              px: 2,
-              borderRadius: "10px",
-              backgroundColor: "transparent",
-            }}
-          >
+          <PaperContainer elevation={3}>
             <Paper
               sx={{ my: 2, py: 2, backgroundColor: "transparent" }}
-              elevation={16}
+              elevation={12}
               className="Update"
             >
-              <Grid container pr={8} sx={containerStyle}>
+              <Grid container pr={4} sx={containerStyle}>
                 <Grid item xs={4}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">NAME</Typography>
@@ -132,7 +139,7 @@ const Update = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8} sx={containerStyle}>
+              <Grid container pr={4} sx={containerStyle}>
                 <Grid item xs={4}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">ID NUMBER</Typography>
@@ -151,7 +158,7 @@ const Update = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8} sx={containerStyle}>
+              <Grid container pr={4} sx={containerStyle}>
                 <Grid item xs={4}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">EMAIL</Typography>
@@ -170,7 +177,7 @@ const Update = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container pr={8} sx={containerStyle}>
+              <Grid container pr={4} sx={containerStyle}>
                 <Grid item xs={4}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">PHONE NUMBER</Typography>
@@ -190,67 +197,72 @@ const Update = () => {
                 </Grid>
               </Grid>
             </Paper>
-          </Paper>
-        </Box>
-      </ThemeProvider>
-      <Box m={2}>
-        {/* <Link
+            <Box m={2}>
+              {/* <Link
           to="/view"
           state={{ stud: { name: name, id: id, phno: phno, email: email } }}
         > */}
-        <Button
-          sx={{ mx: 2 }}
-          size="large"
-          variant="outlined"
-          color="primary"
-          onClick={(event) => {
-            console.log(originalId);
-            event.preventDefault();
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
+                color="primary"
+                onClick={(event) => {
+                  console.log(originalId);
+                  event.preventDefault();
 
-            // Make the PUT request to your API endpoint
-            axios
-              .put(`${process.env.REACT_APP_NAME}/${id}`, {
-                name: name,
-                id: id,
-                phno: phno,
-                email: email,
-              })
-              .then((response) => {
-                // console.log({ name: name, id: id, phno: phno, email: email });
-                navigate("/view", {
-                  state: {
-                    stud: { name: name, id: id, phno: phno, email: email },
-                  },
-                  replace: true,
-                }); // Handle the API response
-              })
-              .catch((error) => {
-                console.error("error"); // Handle any error that occurs
-              });
-          }}
-          startIcon={<UpgradeIcon />}
-        >
-          UPDATE
-        </Button>
-        {/* </Link> */}
-        {/* <Link to="/view" state={{ stud: st }}> */}
-        <Button
-          sx={{ mx: 2 }}
-          size="large"
-          variant="outlined"
-          color="error"
-          startIcon={<CancelIcon />}
-          onClick={(event) => {
-            navigate("/view", {
-              state: { stud: st },
-              replace: true,
-            });
-          }}
-        >
-          CANCEL
-        </Button>
-        {/* </Link> */}
-      </Box>
+                  // Make the PUT request to your API endpoint
+                  axios
+                    .put(`${process.env.REACT_APP_NAME}/${id}`, {
+                      name: name,
+                      id: id,
+                      phno: phno,
+                      email: email,
+                    })
+                    .then((response) => {
+                      // console.log({ name: name, id: id, phno: phno, email: email });
+                      navigate("/view", {
+                        state: {
+                          stud: {
+                            name: name,
+                            id: id,
+                            phno: phno,
+                            email: email,
+                          },
+                        },
+                        replace: true,
+                      }); // Handle the API response
+                    })
+                    .catch((error) => {
+                      console.error("error"); // Handle any error that occurs
+                    });
+                }}
+                startIcon={<UpgradeIcon />}
+              >
+                UPDATE
+              </Button>
+              {/* </Link> */}
+              {/* <Link to="/view" state={{ stud: st }}> */}
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
+                color="error"
+                startIcon={<CancelIcon />}
+                onClick={(event) => {
+                  navigate("/view", {
+                    state: { stud: st },
+                    replace: true,
+                  });
+                }}
+              >
+                CANCEL
+              </Button>
+              {/* </Link> */}
+            </Box>
+          </PaperContainer>
+        </Box>
+      </ThemeProvider>
     </Container>
     // </form>
   );

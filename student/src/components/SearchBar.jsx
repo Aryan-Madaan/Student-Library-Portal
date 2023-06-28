@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
@@ -10,6 +10,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Table from "./Table";
 import AddStudent from "./AddStudent";
+import { useAsyncError } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -18,17 +19,17 @@ const theme = createTheme({
 });
 
 const SearchBar = () => {
-
   const [data, setData] = useState([]);
-  
+
   const [searchField, setSearchField] = useState("");
   const [focus, setFocus] = useState(8);
-  
+  const [onLoad, setOnLoad] = useState(false);
+
   const fetchData = async () => {
     try {
       // console.log(process.env.REACT_APP_NAME);
       const response = await axios.get(process.env.REACT_APP_NAME);
-      
+
       // console.log(response.json())
       // console.log(response.data);
       const jsonData = response.data;
@@ -41,10 +42,14 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-   fetchData();
-  }, );
+    fetchData();
+  }, [onLoad]);
+
+
   const filteredstudents =
-    data===[]?null:searchField.toString().trim() === ""
+    data === []
+      ? null
+      : searchField.toString().trim() === ""
       ? data
       : data.filter((student) => {
           // console.log(student.name);

@@ -1,17 +1,9 @@
-import {
-  Paper,
-  AppBar,
-  Typography,
-  Toolbar,
-  Box,
-  Icon,
-} from "@mui/material";
+import { Paper, AppBar, Typography, Toolbar, Box, Icon } from "@mui/material";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import HomeButton from "./HomeButton";
-
 
 import "./Navbar.css";
 
@@ -24,7 +16,11 @@ const lightTheme = createTheme({
 const Navbar = () => {
   return (
     <ThemeProvider theme={lightTheme}>
-      <Paper elevation={16} sx={{ bgcolor: "transparent" }} className="Navbar">
+      <Paper
+        elevation={16}
+        sx={{ bgcolor: "transparent", backdropFilter: "blur(5px)" }}
+        className="Navbar"
+      >
         <AppBar position="static" sx={{ bgcolor: "transparent" }}>
           <Toolbar
             sx={{

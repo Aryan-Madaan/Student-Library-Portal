@@ -20,6 +20,7 @@ const PaperContainer = styled(Paper)(({ theme }) => ({
   padding: "2rem",
   width: "30%",
   backgroundColor: "transparent",
+  backdropFilter: "blur(5px)",
 
   [theme.breakpoints.down("md")]: {
     width: "60%",
@@ -40,7 +41,7 @@ const Login = () => {
   return (
     <MainContainer container justifyContent="center" alignItems="center">
       <ThemeProvider theme={theme}>
-        <PaperContainer elevation={5}>
+        <PaperContainer elevation={3}>
           <form onSubmit={handleLogin}>
             <Grid container spacing={3} direction="column">
               <Grid item>

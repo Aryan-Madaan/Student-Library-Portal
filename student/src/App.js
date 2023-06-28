@@ -9,6 +9,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import ParticlesBG from "./components/ParticlesBG";
 import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
 import Update from "./components/Update";
@@ -46,6 +47,8 @@ function App() {
   return (
     <Router>
       <div style={{ minHeight: "100vh" }} className="App">
+        <ParticlesBG />
+
         <div>
           <Navbar />
         </div>

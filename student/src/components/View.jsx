@@ -2,15 +2,17 @@ import React, { useState } from "react";
 
 import { Button, Paper, Box, Grid, Typography } from "@mui/material";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useLocation, useNavigate  } from "react-router-dom";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 
 import Delete from "./Delete";
+import "./View.css";
 
 const darkTheme = createTheme({ palette: { mode: "light" } });
+
 const boxStyle = {
   px: 8,
   py: 1,
@@ -19,11 +21,24 @@ const boxStyle = {
   color: "#c1c1c1",
 };
 
+const PaperContainer = styled(Paper)(({ theme }) => ({
+  paddingTop: "0.5rem",
+  paddingBottom: "0.5rem",
+  paddingLeft: "2rem",
+  paddingRight: "2rem",
+  borderRadius: "10px",
+  backgroundColor: "transparent",
+  backdropFilter: "blur(30px)",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+}));
+
 const View = () => {
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
   const [delstudent, setDelStudent] = useState([]);
-
 
   const deleteBtn = (event) => {
     event.preventDefault();
@@ -42,7 +57,7 @@ const View = () => {
   try {
     st = location.state.stud;
   } catch (e) {
-    console.log(location.state)
+    console.log(location.state);
     return "Sorry the webpage you are looking for is not available";
   }
 
@@ -56,23 +71,13 @@ const View = () => {
     >
       <ThemeProvider theme={darkTheme}>
         <Box>
-          <Paper
-            sx={{
-              py: 0.5,
-              px: 2,
-              borderRadius: "10px",
-              backgroundColor: "transparent",
-            }}
-          >
+          <PaperContainer>
             <Paper
-              sx={{
-                my: 2,
-                py: 2,
-                backgroundColor: "transparent",
-              }}
-              elevation={16}
+              sx={{ my: 2, py: 4, backgroundColor: "transparent" }}
+              elevation={12}
+              className="View"
             >
-              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
+              <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">NAME</Typography>
@@ -84,7 +89,7 @@ const View = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
+              <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">ID NUMBER</Typography>
@@ -96,7 +101,7 @@ const View = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
+              <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">EMAIL</Typography>
@@ -108,7 +113,7 @@ const View = () => {
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container px={2} sx={{ justifyContent: "space-between" }}>
+              <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">PHONE NUMBER</Typography>
@@ -121,48 +126,48 @@ const View = () => {
                 </Grid>
               </Grid>
             </Paper>
-          </Paper>
+            <Box m={2}>
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
+                color="primary"
+                startIcon={<UpgradeIcon />}
+                onClick={() => {
+                  navigate("/update", {
+                    state: { stud: st },
+                    replace: true,
+                  });
+                }}
+              >
+                UPDATE
+              </Button>
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
+                color="error"
+                startIcon={<DeleteIcon />}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setDelStudent(st);
+                  if (isDelete1) {
+                    setIsDelete2(true);
+                    setIsDelete1(false);
+                  } else {
+                    setIsDelete1(true);
+                    setIsDelete2(false);
+                  }
+                }}
+              >
+                DELETE
+              </Button>
+              {isDelete1 && <Delete id={delstudent.id} />}
+              {isDelete2 && <Delete id={delstudent.id} />}
+            </Box>
+          </PaperContainer>
         </Box>
       </ThemeProvider>
-      <Box m={2}>
-          <Button
-            sx={{ mx: 2 }}
-            size="large"
-            variant="outlined"
-            color="primary"
-            startIcon={<UpgradeIcon />}
-            onClick={()=>{
-              navigate('/update',{
-              state: { stud: st },
-              replace:true
-            });
-           }}
-          >
-            UPDATE
-          </Button>
-        <Button
-          sx={{ mx: 2 }}
-          size="large"
-          variant="outlined"
-          color="error"
-          startIcon={<DeleteIcon />}
-          onClick={(event) => {
-            event.preventDefault();
-            setDelStudent(st);
-            if (isDelete1) {
-              setIsDelete2(true);
-              setIsDelete1(false);
-            } else {
-              setIsDelete1(true);
-              setIsDelete2(false);
-            }
-          }}
-        >
-          DELETE
-        </Button>
-        {isDelete1 && <Delete id={delstudent.id}/>}
-        {isDelete2 && <Delete id={delstudent.id}/>}
-      </Box>
     </Box>
   );
 };

@@ -56,7 +56,7 @@ const BasicTable = ({ studData }) => {
       <TableContainer
         component={Paper}
         elevation={12}
-        sx={{ backgroundColor: "transparent" }}
+        sx={{ backgroundColor: "transparent", backdropFilter: "blur(20px)" }}
         className="Table"
       >
         {isDelete1 && <Delete id={delstudent.id} />}
@@ -106,38 +106,38 @@ const BasicTable = ({ studData }) => {
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Box display="flex" alignItems="center">
                       <Box marginRight={1}>
-                          <Button
-                            size="medium"
-                            variant="outlined"
-                            color="success"
-                            onClick={()=>{
-                              navigate("/view", {
-                                state: {
-                                  stud: student,
-                                },
-                                replace: true,
-                              });
-                            }}
-                          >
-                            View
-                          </Button>
+                        <Button
+                          size="medium"
+                          variant="outlined"
+                          color="success"
+                          onClick={() => {
+                            navigate("/view", {
+                              state: {
+                                stud: student,
+                              },
+                              replace: true,
+                            });
+                          }}
+                        >
+                          View
+                        </Button>
                       </Box>
                       <Box marginRight={1}>
-                          <Button
-                            size="medium"
-                            variant="outlined"
-                            color="primary"
-                           onClick={()=>{
-                              navigate("/view", {
-                                state: {
-                                  stud: student,
-                                },
-                                replace: true,
-                              });
-                            }}
-                          >
-                            Update
-                          </Button>
+                        <Button
+                          size="medium"
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => {
+                            navigate("/view", {
+                              state: {
+                                stud: student,
+                              },
+                              replace: true,
+                            });
+                          }}
+                        >
+                          Update
+                        </Button>
                       </Box>
                       <Box>
                         <Button
@@ -154,9 +154,7 @@ const BasicTable = ({ studData }) => {
                               setIsDelete1(true);
                               setIsDelete2(false);
                             }
-                          }
-                          
-                        }
+                          }}
                         >
                           Delete
                         </Button>
