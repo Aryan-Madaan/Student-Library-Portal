@@ -7,11 +7,25 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
+import HomeIcon from "@mui/icons-material/Home";
 
 import Delete from "./Delete";
 import "./View.css";
 
-const darkTheme = createTheme({ palette: { mode: "light" } });
+const darkTheme = createTheme({
+  palette: {
+    mode: "light",
+    error: {
+      main: "#fa4343",
+    },
+    primary: {
+      main: "#00efff",
+    },
+    success: {
+      main: "#5cff61",
+    },
+  },
+});
 
 const boxStyle = {
   px: 8,
@@ -127,6 +141,21 @@ const View = () => {
               </Grid>
             </Paper>
             <Box m={2}>
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
+                color="success"
+                startIcon={<HomeIcon />}
+                onClick={() => {
+                  navigate("/", {
+                    state: { stud: st },
+                    replace: true,
+                  });
+                }}
+              >
+                Home
+              </Button>
               <Button
                 sx={{ mx: 2 }}
                 size="large"

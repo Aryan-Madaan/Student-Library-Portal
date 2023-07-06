@@ -17,12 +17,26 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import CancelIcon from "@mui/icons-material/Cancel";
+import HomeIcon from "@mui/icons-material/Home";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
 // import studentDatabase from "../data/studentDatabase.json";
 
-const darkTheme = createTheme({ palette: { mode: "light" } });
+const darkTheme = createTheme({
+  palette: {
+    mode: "light",
+    error: {
+      main: "#fa4343",
+    },
+    primary: {
+      main: "#00efff",
+    },
+    success: {
+      main: "#5cff61",
+    },
+  },
+});
 
 const boxStyle = {
   mx: 4,
@@ -134,7 +148,10 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={name}
                       onChange={nameChangeHandler}
-                      InputProps={{ style: { color: "#c1c1c1" } }}
+                      InputProps={{
+                        style: { color: "#c1c1c1" },
+                        autoComplete: "off", // Add this line
+                      }}
                     />
                   </Box>
                 </Grid>
@@ -153,7 +170,11 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={id}
                       onChange={idChangeHandler}
-                      InputProps={{ style: { color: "#c1c1c1" } }}
+                      InputProps={{
+                        style: { color: "#c1c1c1" },
+                        autoComplete: "off", // Add this line
+                      }}
+                      disabled // Add this line
                     />
                   </Box>
                 </Grid>
@@ -172,7 +193,10 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={email}
                       onChange={emailChangeHandler}
-                      InputProps={{ style: { color: "#c1c1c1" } }}
+                      InputProps={{
+                        style: { color: "#c1c1c1" },
+                        autoComplete: "off", // Add this line
+                      }}
                     />
                   </Box>
                 </Grid>
@@ -191,7 +215,10 @@ const Update = () => {
                       sx={{ width: "100%" }}
                       value={phno}
                       onChange={phnoChangeHandler}
-                      InputProps={{ style: { color: "#c1c1c1" } }}
+                      InputProps={{
+                        style: { color: "#c1c1c1" },
+                        autoComplete: "off", // Add this line
+                      }}
                     />
                   </Box>
                 </Grid>
@@ -206,10 +233,30 @@ const Update = () => {
                 sx={{ mx: 2 }}
                 size="large"
                 variant="outlined"
+                color="success"
+                startIcon={<HomeIcon />}
+                onClick={() => {
+                  navigate("/", {
+                    state: { stud: st },
+                    replace: true,
+                  });
+                }}
+              >
+                Home
+              </Button>
+              <Button
+                sx={{ mx: 2 }}
+                size="large"
+                variant="outlined"
                 color="primary"
                 onClick={(event) => {
                   console.log(originalId);
                   event.preventDefault();
+
+                  if (!name || !email || !phno) {
+                    alert("Please fill in all the fields.");
+                    return;
+                  }
 
                   // Make the PUT request to your API endpoint
                   axios
