@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
+import Loading from "./Loading";
+
 import { useState } from "react";
 
 import "./Update.css";
@@ -75,7 +77,7 @@ const AddStudentPage = () => {
   } catch (e) {
     <div>ERROR READING STUDENT DATA</div>;
   }
-  const [isDisabled, setDisabled] = useState(false);
+  const [isDisabled, setDisabled] = useState(true);
   // const originalId = st.id;
   const [name, setName] = useState("");
   const [id, setId] = useState("");
@@ -115,6 +117,7 @@ const AddStudentPage = () => {
       }}
     >
       <ThemeProvider theme={darkTheme}>
+        {!isDisabled && <Loading />}
         <Box>
           <Paper
             sx={{
@@ -234,13 +237,12 @@ const AddStudentPage = () => {
           onClick={(event) => {
             //   console.log(originalId);
             event.preventDefault();
-            setDisabled(true);
 
             if (!name || !email || !phno || !id) {
               alert("Please fill in all the fields.");
               return;
             }
-
+            setDisabled(false);
             // Make the POST request to your API endpoint
             axios
               .post(process.env.REACT_APP_NAME, {
@@ -251,6 +253,7 @@ const AddStudentPage = () => {
                 email: email,
               })
               .then((response) => {
+                setDisabled(true);
                 // console.log({ name: name, id: id, phno: phno, email: email });
                 navigate("/view", {
                   state: {
@@ -260,9 +263,9 @@ const AddStudentPage = () => {
                 }); // Handle the API response
               })
               .catch((error) => {
+                setDisabled(true);
                 console.error("error"); // Handle any error that occurs
               });
-            setDisabled(false);
           }}
           startIcon={<UpgradeIcon />}
         >

@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 
+import Loading from "./Loading";
+
 import { useState } from "react";
 
 import "./Update.css";
@@ -89,6 +91,8 @@ const Update = () => {
     <div>ERROR READING STUDENT DATA</div>;
   }
   const originalId = st.id;
+
+  const [isDisabled, setDisabled] = useState(true);
   const [name, setName] = useState(st.name);
   const [id, setId] = useState(st.id);
   const [email, setEmail] = useState(st.email);
@@ -127,6 +131,7 @@ const Update = () => {
       }}
     >
       <ThemeProvider theme={darkTheme}>
+        {!isDisabled && <Loading />}
         <Box>
           <PaperContainer elevation={3}>
             <Paper
@@ -257,7 +262,7 @@ const Update = () => {
                     alert("Please fill in all the fields.");
                     return;
                   }
-
+                  setDisabled(false);
                   // Make the PUT request to your API endpoint
                   axios
                     .put(`${process.env.REACT_APP_NAME}/${id}`, {
@@ -268,6 +273,8 @@ const Update = () => {
                     })
                     .then((response) => {
                       // console.log({ name: name, id: id, phno: phno, email: email });
+                      setDisabled(true);
+
                       navigate("/view", {
                         state: {
                           stud: {
@@ -281,6 +288,7 @@ const Update = () => {
                       }); // Handle the API response
                     })
                     .catch((error) => {
+                      setDisabled(true);
                       console.error("error"); // Handle any error that occurs
                     });
                 }}
