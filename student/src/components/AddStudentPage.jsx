@@ -245,7 +245,7 @@ const AddStudentPage = () => {
             setDisabled(false);
             // Make the POST request to your API endpoint
             axios
-              .post(process.env.REACT_APP_NAME, {
+              .post(`${process.env.REACT_APP_NAME}/students`, {
                 name: name,
                 id: id,
 

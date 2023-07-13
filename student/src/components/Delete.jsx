@@ -52,7 +52,7 @@ const Delete = ({ id }) => {
   const deleteStudent = async () => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_NAME}/${id}`
+        `${process.env.REACT_APP_NAME}/students/${id}`
       );
       console.log(response.data);
       // Handle response
