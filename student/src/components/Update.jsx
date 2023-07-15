@@ -265,7 +265,7 @@ const Update = () => {
                   setDisabled(false);
                   // Make the PUT request to your API endpoint
                   axios
-                    .put(`${process.env.REACT_APP_NAME}/${id}`, {
+                    .put(`${process.env.REACT_APP_NAME}/students/${id}`, {
                       name: name,
                       id: id,
                       phno: phno,

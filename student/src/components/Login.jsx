@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Paper,
   Grid,
@@ -8,6 +8,9 @@ import {
   ThemeProvider,
   createTheme,
 } from "@mui/material";
+import axios from "axios";
+
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MainContainer = styled(Grid)({
   position: "fixed",
@@ -34,8 +37,22 @@ const theme = createTheme({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
   const handleLogin = (e) => {
     e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_NAME}/login`, {
+        email: email,
+        password: pwd,
+      })
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((err) => {
+        navigate("/login");
+      });
   };
 
   return (
@@ -46,10 +63,14 @@ const Login = () => {
             <Grid container spacing={3} direction="column">
               <Grid item>
                 <TextField
-                  label="Username"
+                  label="Email"
                   variant="outlined"
                   required
                   fullWidth
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                  autoComplete="off"
                 />
               </Grid>
               <Grid item>
@@ -59,6 +80,9 @@ const Login = () => {
                   type="password"
                   required
                   fullWidth
+                  onChange={(event) => {
+                    setPwd(event.target.value);
+                  }}
                 />
               </Grid>
               <Grid item>

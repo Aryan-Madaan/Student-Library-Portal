@@ -28,7 +28,9 @@ const SearchBar = () => {
   const fetchData = async () => {
     try {
       // console.log(process.env.REACT_APP_NAME);
-      const response = await axios.get(process.env.REACT_APP_NAME);
+      const response = await axios.get(
+        `${process.env.REACT_APP_NAME}/students`
+      );
 
       // console.log(response.json())
       // console.log(response.data);
@@ -44,7 +46,6 @@ const SearchBar = () => {
   useEffect(() => {
     fetchData();
   }, [onLoad]);
-
 
   const filteredstudents =
     data === []
