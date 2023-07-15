@@ -39,7 +39,7 @@ const BasicTable = ({ studData }) => {
   const navigate = useNavigate();
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
-  const [delstudent, setDelStudent] = useState([]);
+  const [delLend, setDelLend] = useState([]);
   // const deleteBtn = (event,student) => {
   //   event.preventDefault();
   //   if (isDelete1) {
@@ -56,11 +56,11 @@ const BasicTable = ({ studData }) => {
       <TableContainer
         component={Paper}
         elevation={12}
-        sx={{ backgroundColor: "transparent" }}
+        sx={{ backgroundColor: "transparent", backdropFilter: "blur(20px)" }}
         className="Table"
       >
-        {isDelete1 && <Delete id={delstudent.id} />}
-        {isDelete2 && <Delete id={delstudent.id} />}
+        {isDelete1 && <Delete id={delLend.id} />}
+        {isDelete2 && <Delete id={delLend.id} />}
         <Table>
           <TableHead>
             <TableRow>
@@ -69,6 +69,9 @@ const BasicTable = ({ studData }) => {
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
                 <Typography variant="h7">STUDENT ID NUMBER</Typography>
+              </TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>
+                <Typography variant="h7">ACTION</Typography>
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
                 <Typography variant="h7">BOOK TITLE</Typography>
@@ -98,6 +101,27 @@ const BasicTable = ({ studData }) => {
                     <Typography variant="h7">{student.id}</Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
+                    <Box display="flex" alignItems="center">
+                      <Box marginRight={1}>
+                        <Button
+                          size="medium"
+                          variant="outlined"
+                          color="success"
+                          onClick={() => {
+                            navigate("/view", {
+                              state: {
+                                stud: student,
+                              },
+                              replace: true,
+                            });
+                          }}
+                        >
+                          View Student
+                        </Button>
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Typography variant="h7">{student.email}</Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
@@ -106,38 +130,21 @@ const BasicTable = ({ studData }) => {
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Box display="flex" alignItems="center">
                       <Box marginRight={1}>
-                          <Button
-                            size="medium"
-                            variant="outlined"
-                            color="success"
-                            onClick={()=>{
-                              navigate("/view", {
-                                state: {
-                                  stud: student,
-                                },
-                                replace: true,
-                              });
-                            }}
-                          >
-                            View
-                          </Button>
-                      </Box>
-                      <Box marginRight={1}>
-                          <Button
-                            size="medium"
-                            variant="outlined"
-                            color="primary"
-                           onClick={()=>{
-                              navigate("/view", {
-                                state: {
-                                  stud: student,
-                                },
-                                replace: true,
-                              });
-                            }}
-                          >
-                            Update
-                          </Button>
+                        <Button
+                          size="medium"
+                          variant="outlined"
+                          color="success"
+                          onClick={() => {
+                            navigate("/view", {
+                              state: {
+                                stud: student,
+                              },
+                              replace: true,
+                            });
+                          }}
+                        >
+                          View Book
+                        </Button>
                       </Box>
                       <Box>
                         <Button
@@ -146,7 +153,7 @@ const BasicTable = ({ studData }) => {
                           color="error"
                           onClick={(event) => {
                             event.preventDefault();
-                            setDelStudent(student);
+                            setDelLend(student);
                             if (isDelete1) {
                               setIsDelete2(true);
                               setIsDelete1(false);
@@ -154,11 +161,9 @@ const BasicTable = ({ studData }) => {
                               setIsDelete1(true);
                               setIsDelete2(false);
                             }
-                          }
-                          
-                        }
+                          }}
                         >
-                          Delete
+                          Delete Lending
                         </Button>
                       </Box>
                     </Box>

@@ -10,17 +10,17 @@ const theme = createTheme({
   },
 });
 
-const NewLending = () => {
+const AddStudent = () => {
   const navigate = useNavigate()
   return (
     <Box marginTop={4} marginRight={3}>
       <ThemeProvider theme={theme}>
         <Button variant="outlined" onClick={()=>{
           navigate("/add");
-        }}>+ NEW LENDING</Button>
+        }}>+ ADD LEND</Button>
       </ThemeProvider>
     </Box>
   );
 };
 
-export default NewLending;
+export default AddStudent;

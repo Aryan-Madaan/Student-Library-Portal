@@ -9,23 +9,21 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+import ParticlesBG from "./components/ParticlesBG";
 import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
-import View from "./components/View";
 import Status from "./components/Status";
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
 
+import AddStudentPage from "./components/AddLendPage";
 import Container from "@mui/material/Container";
-import NewLending from "./components/NewLending";
 
 // import studentDatabase from "./data/studentDatabase.json";
 
 function App() {
   // implement a loader here
   const [loading, setLoading] = useState(true);
-
-
-  
 
   // const fetchData = useCallback( async () => {
   //   var [mydata,err,error] = await FetchData();
@@ -38,20 +36,17 @@ function App() {
   //   }
   // });
 
-
-  
   useEffect(() => {
-   
     // console.log(data)
     setTimeout(() => setLoading(false), 3000);
     // setLoading(false);
   }, [loading]);
 
-
-
   return (
     <Router>
       <div style={{ minHeight: "100vh" }} className="App">
+        <ParticlesBG />
+
         <div>
           <Navbar />
         </div>
@@ -67,9 +62,8 @@ function App() {
                 </Container>
               }
             />
-            <Route path="/view" element={<View />} />
-            <Route path="/login" element={<div></div>} />
-            <Route path="/lend" element={<NewLending />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/add" element={<AddStudentPage />} />
             <Route path="/status" element={<Status />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
