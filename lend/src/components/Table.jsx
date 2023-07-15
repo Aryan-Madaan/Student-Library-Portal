@@ -20,6 +20,39 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Delete from "./Delete";
 
+const dummyData = [
+  {
+    STUDENT_NAME: "John Doe",
+    STUDENT_ID_NUMBER: "123456789",
+    BOOK_TITLE: "The Great Gatsby",
+    BOOK_CODE: "ABC123",
+  },
+  {
+    STUDENT_NAME: "Alice Smith",
+    STUDENT_ID_NUMBER: "987654321",
+    BOOK_TITLE: "To Kill a Mockingbird",
+    BOOK_CODE: "DEF456",
+  },
+  {
+    STUDENT_NAME: "Emily Johnson",
+    STUDENT_ID_NUMBER: "456789123",
+    BOOK_TITLE: "Pride and Prejudice",
+    BOOK_CODE: "GHI789",
+  },
+  {
+    STUDENT_NAME: "Michael Williams",
+    STUDENT_ID_NUMBER: "321654987",
+    BOOK_TITLE: "1984",
+    BOOK_CODE: "JKL012",
+  },
+  {
+    STUDENT_NAME: "Sarah Brown",
+    STUDENT_ID_NUMBER: "654321987",
+    BOOK_TITLE: "The Catcher in the Rye",
+    BOOK_CODE: "MNO345",
+  },
+];
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -85,20 +118,22 @@ const BasicTable = ({ studData }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {studData.length === 0 ? (
+            {dummyData.length === 0 ? (
               <TableRow>
                 <TableCell style={{ color: "white", borderBottom: "none" }}>
                   <Typography variant="h6">NO DATA FOUND</Typography>
                 </TableCell>
               </TableRow>
             ) : (
-              studData.map((student) => (
-                <TableRow key={student.id}>
+              dummyData.map((data) => (
+                <TableRow key={`${data.STUDENT_ID_NUMBER}-${data.BOOK_CODE}`}>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
-                    <Typography variant="h7">{student.name}</Typography>
+                    <Typography variant="h7">{data.STUDENT_NAME}</Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
-                    <Typography variant="h7">{student.id}</Typography>
+                    <Typography variant="h7">
+                      {data.STUDENT_ID_NUMBER}
+                    </Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Box display="flex" alignItems="center">
@@ -110,7 +145,7 @@ const BasicTable = ({ studData }) => {
                           onClick={() => {
                             navigate("/view", {
                               state: {
-                                stud: student,
+                                stud: data,
                               },
                               replace: true,
                             });
@@ -122,10 +157,10 @@ const BasicTable = ({ studData }) => {
                     </Box>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
-                    <Typography variant="h7">{student.email}</Typography>
+                    <Typography variant="h7">{data.BOOK_TITLE}</Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
-                    <Typography variant="h7">{student.phno}</Typography>
+                    <Typography variant="h7">{data.BOOK_CODE}</Typography>
                   </TableCell>
                   <TableCell style={{ color: "#c1c1c1", borderBottom: "none" }}>
                     <Box display="flex" alignItems="center">
@@ -137,7 +172,7 @@ const BasicTable = ({ studData }) => {
                           onClick={() => {
                             navigate("/view", {
                               state: {
-                                stud: student,
+                                stud: data,
                               },
                               replace: true,
                             });
@@ -153,7 +188,7 @@ const BasicTable = ({ studData }) => {
                           color="error"
                           onClick={(event) => {
                             event.preventDefault();
-                            setDelLend(student);
+                            setDelLend(data);
                             if (isDelete1) {
                               setIsDelete2(true);
                               setIsDelete1(false);

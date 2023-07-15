@@ -6,6 +6,8 @@ import {
   Container,
   TextField,
   Typography,
+  IconButton,
+  InputBase,
 } from "@mui/material";
 import axios from "axios";
 
@@ -17,16 +19,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import CancelIcon from "@mui/icons-material/Cancel";
+import SearchIcon from "@mui/icons-material/Search";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
 // import studentDatabase from "../data/studentDatabase.json";
 
-const darkTheme = createTheme({ palette: { mode: "light" } });
+const theme = createTheme({ palette: { mode: "light" } });
 
-const theme = createTheme({
+const darkTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     error: {
       main: "#fa4343",
     },
@@ -76,11 +79,15 @@ const AddStudentPage = () => {
     <div>ERROR READING LEND DATA</div>;
   }
   const [isDisabled, setDisabled] = useState(true);
-  // const originalId = st.id;
+
   const [name, setName] = useState("");
   const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [phno, setPhno] = useState("");
+
+  const [data, setData] = useState([]);
+  const [searchStudent, setSearchStudent] = useState("");
+  const [searchBook, setSearchBook] = useState("");
 
   const nameChangeHandler = (event) => {
     setName(event.target.value);
@@ -102,6 +109,17 @@ const AddStudentPage = () => {
     // setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const [selectedStudent, setSelectedStudent] = useState(null);
+  const [selectedBooks, setSelectedBooks] = useState([]);
+
+  const handleChangeStudent = (event) => {
+    setSearchStudent(event.target.value);
+  };
+
+  const handleChangeBook = (event) => {
+    setSearchBook(event.target.value);
+  };
+
   return (
     // <form onSubmit={handleSubmit}>
     <Container
@@ -114,7 +132,7 @@ const AddStudentPage = () => {
         alignItems: "center",
       }}
     >
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         {!isDisabled && <Loading />}
         <Box>
           <Paper
@@ -288,6 +306,70 @@ const AddStudentPage = () => {
         </Button>
         {/* </Link> */}
       </Box>
+      <ThemeProvider theme={darkTheme}>
+        <Box py={3}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Box marginTop={4} marginRight={3}>
+              <Paper
+                component="form"
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: 400,
+                }}
+                elevation={3}
+              >
+                <IconButton
+                  type="button"
+                  sx={{ p: "10px" }}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
+                <InputBase
+                  sx={{ ml: 1, width: 400 }}
+                  type="search"
+                  placeholder="Search Student"
+                  value={searchStudent}
+                  onChange={handleChangeStudent}
+                />
+              </Paper>
+            </Box>
+            <Box marginTop={4} marginLeft={3}>
+              <Paper
+                component="form"
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: 400,
+                }}
+                elevation={3}
+              >
+                <IconButton
+                  type="button"
+                  sx={{ p: "10px" }}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
+                <InputBase
+                  sx={{ ml: 1, width: 400 }}
+                  type="search"
+                  placeholder="Search Book"
+                  value={searchBook}
+                  onChange={handleChangeBook}
+                />
+              </Paper>
+            </Box>
+          </Box>
+        </Box>
+      </ThemeProvider>
     </Container>
     // </form>
   );
