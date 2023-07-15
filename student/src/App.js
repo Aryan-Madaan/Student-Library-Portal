@@ -69,7 +69,7 @@ function App() {
             <Route path="/update" element={<Update />} />
             <Route path="/add" element={<AddStudentPage />} />
             <Route path="/status" element={<Status />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         )}
       </div>
