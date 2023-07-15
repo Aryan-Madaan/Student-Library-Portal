@@ -89,7 +89,7 @@ const Update = () => {
   } catch (e) {
     <div>ERROR READING BOOK DATA</div>;
   }
-  const originalId = bk.id;
+  const originalId = book.id;
 
   const [isDisabled, setDisabled] = useState(true);
   const [name, setName] = useState(book.name);

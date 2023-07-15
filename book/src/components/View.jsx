@@ -52,7 +52,7 @@ const PaperContainer = styled(Paper)(({ theme }) => ({
 const View = () => {
   const [isDelete1, setIsDelete1] = useState(false);
   const [isDelete2, setIsDelete2] = useState(false);
-  const [delBook, setDelBook] = useState([]);
+  const [delstudent, setDelStudent] = useState([]);
 
   const deleteBtn = (event) => {
     event.preventDefault();
@@ -67,9 +67,9 @@ const View = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  var book = "";
+  var st = "";
   try {
-    book = location.state.book;
+    st = location.state.stud;
   } catch (e) {
     console.log(location.state);
     return "Sorry the webpage you are looking for is not available";
@@ -94,7 +94,7 @@ const View = () => {
               <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">NAME</Typography>
+                    <Typography variant="h6">TITLE</Typography>
                   </Box>
                 </Grid>
                 <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
@@ -106,7 +106,7 @@ const View = () => {
               <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">ID NUMBER</Typography>
+                    <Typography variant="h6">AUTHOR</Typography>
                   </Box>
                 </Grid>
                 <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
@@ -118,24 +118,12 @@ const View = () => {
               <Grid container item sx={{ justifyContent: "space-between" }}>
                 <Grid item xs={6}>
                   <Box sx={boxStyle}>
-                    <Typography variant="h6">EMAIL</Typography>
+                    <Typography variant="h6">DESCRIPTION</Typography>
                   </Box>
                 </Grid>
                 <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
                   <Box sx={boxStyle}>
                     <Typography variant="h6">{st.email}</Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-              <Grid container item sx={{ justifyContent: "space-between" }}>
-                <Grid item xs={6}>
-                  <Box sx={boxStyle}>
-                    <Typography variant="h6">PHONE NUMBER</Typography>
-                  </Box>
-                </Grid>
-                <Grid container item xs={6} sx={{ justifyContent: "flex-end" }}>
-                  <Box sx={boxStyle}>
-                    <Typography variant="h6">{st.phno}</Typography>
                   </Box>
                 </Grid>
               </Grid>
@@ -149,7 +137,7 @@ const View = () => {
                 startIcon={<HomeIcon />}
                 onClick={() => {
                   navigate("/", {
-                    state: { book: book },
+                    state: { stud: st },
                     replace: true,
                   });
                 }}
@@ -164,7 +152,7 @@ const View = () => {
                 startIcon={<UpgradeIcon />}
                 onClick={() => {
                   navigate("/update", {
-                    state: { book: book },
+                    state: { stud: st },
                     replace: true,
                   });
                 }}
@@ -179,7 +167,7 @@ const View = () => {
                 startIcon={<DeleteIcon />}
                 onClick={(event) => {
                   event.preventDefault();
-                  setDelBook(book);
+                  setDelStudent(st);
                   if (isDelete1) {
                     setIsDelete2(true);
                     setIsDelete1(false);
@@ -191,11 +179,106 @@ const View = () => {
               >
                 DELETE
               </Button>
-              {isDelete1 && <Delete id={delBook.id} />}
-              {isDelete2 && <Delete id={delBook.id} />}
+              {isDelete1 && <Delete id={delstudent.id} />}
+              {isDelete2 && <Delete id={delstudent.id} />}
             </Box>
           </PaperContainer>
         </Box>
+      </ThemeProvider>
+      <ThemeProvider theme={darkTheme}>
+        <TableContainer
+          component={Paper}
+          elevation={12}
+          sx={{
+            backgroundColor: "transparent",
+            backdropFilter: "blur(20px)",
+            margin: "4rem",
+            maxWidth: "80%",
+          }}
+          className="Table"
+        >
+          {isDelete1 && <Delete id={delstudent.id} />}
+          {isDelete2 && <Delete id={delstudent.id} />}
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell style={{ color: "white", borderBottom: "none" }}>
+                  <Typography variant="h7">BOOK CODE</Typography>
+                </TableCell>
+                <TableCell style={{ color: "white", borderBottom: "none" }}>
+                  <Typography variant="h7">STATUS</Typography>
+                </TableCell>
+                <TableCell style={{ color: "white", borderBottom: "none" }}>
+                  <Typography variant="h7">ACTION</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            {/* <TableBody>
+              {studData.length === 0 ? (
+                <TableRow>
+                  <TableCell style={{ color: "white", borderBottom: "none" }}>
+                    <Typography variant="h6">NO DATA FOUND</Typography>
+                  </TableCell>
+                </TableRow>
+              ) : (
+                studData.map((student) => (
+                  <TableRow key={student.id}>
+                    <TableCell
+                      style={{ color: "#c1c1c1", borderBottom: "none" }}
+                    >
+                      <Typography variant="h7">{student.name}</Typography>
+                    </TableCell>
+                    <TableCell
+                      style={{ color: "#c1c1c1", borderBottom: "none" }}
+                    >
+                      <Typography variant="h7">{student.id}</Typography>
+                    </TableCell>
+                    <TableCell
+                      style={{ color: "#c1c1c1", borderBottom: "none" }}
+                    >
+                      <Typography variant="h7">{student.email}</Typography>
+                    </TableCell>
+                    <TableCell
+                      style={{ color: "#c1c1c1", borderBottom: "none" }}
+                    >
+                      <Typography variant="h7">{student.phno}</Typography>
+                    </TableCell>
+                    <TableCell
+                      style={{ color: "#c1c1c1", borderBottom: "none" }}
+                    >
+                      <Box display="flex" alignItems="center">
+                        <Box marginRight={1}>
+                        </Box>
+                        <Box marginRight={1}>
+                        </Box>
+                        <Box>
+                          <Button
+                            size="medium"
+                            variant="outlined"
+                            color="error"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setDelStudent(student);
+                              if (isDelete1) {
+                                setIsDelete2(true);
+                                setIsDelete1(false);
+                              } else {
+                                setIsDelete1(true);
+                                setIsDelete2(false);
+                              }
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </Box>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody> */}
+          </Table>
+        </TableContainer>
       </ThemeProvider>
     </Box>
   );

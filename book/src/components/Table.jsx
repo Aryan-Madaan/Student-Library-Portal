@@ -65,16 +65,19 @@ const BasicTable = ({ bookData }) => {
           <TableHead>
             <TableRow>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
-                <Typography variant="h7">NAME</Typography>
+                <Typography variant="h7">TITLE</Typography>
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
-                <Typography variant="h7">ID NUMBER</Typography>
+                <Typography variant="h7">AUTHOR</Typography>
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
-                <Typography variant="h7">EMAIL</Typography>
+                <Typography variant="h7">DESCRIPTION</Typography>
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
-                <Typography variant="h7">PHONE NUMBER</Typography>
+                <Typography variant="h7">BOOKS ISSUED</Typography>
+              </TableCell>
+              <TableCell style={{ color: "white", borderBottom: "none" }}>
+                <Typography variant="h7">BOOKS AVAILABLE</Typography>
               </TableCell>
               <TableCell style={{ color: "white", borderBottom: "none" }}>
                 <Typography variant="h7">ACTION</Typography>

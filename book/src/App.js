@@ -18,7 +18,7 @@ import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import View from "./components/View";
 
-import AddStudentPage from "./components/AddStudentPage";
+import AddBookPage from "./components/AddBookPage";
 import Container from "@mui/material/Container";
 
 // import studentDatabase from "./data/studentDatabase.json";
@@ -67,7 +67,7 @@ function App() {
             <Route path="/view" element={<View />} />
             <Route path="/login" element={<Login />} />
             <Route path="/update" element={<Update />} />
-            <Route path="/add" element={<AddStudentPage />} />
+            <Route path="/add" element={<AddBookPage />} />
             <Route path="/status" element={<Status />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
