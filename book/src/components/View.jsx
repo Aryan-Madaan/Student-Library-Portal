@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-import { Button, Paper, Box, Grid, Typography } from "@mui/material";
+import { Button, Paper, Box, Grid, Typography, TableRow, TableHead, TableContainer, TableCell, Table } from "@mui/material";
+
 
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,7 +34,9 @@ const boxStyle = {
   fontSize: "1.5rem",
   whiteSpace: "nowrap",
   color: "#c1c1c1",
+  
 };
+
 
 const PaperContainer = styled(Paper)(({ theme }) => ({
   paddingTop: "0.5rem",

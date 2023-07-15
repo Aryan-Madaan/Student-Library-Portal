@@ -10,7 +10,6 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Table from "./Table";
 import AddBook from "./AddBook";
-import { useAsyncError } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -28,7 +27,7 @@ const SearchBar = () => {
   const fetchData = async () => {
     try {
       // console.log(process.env.REACT_APP_NAME);
-      const response = await axios.get(process.env.REACT_APP_NAME);
+      const response = await axios.get(`${process.env.REACT_APP_NAME}/books`);
 
       // console.log(response.json())
       // console.log(response.data);

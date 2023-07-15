@@ -6,6 +6,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
+// const bookRoutes = require("./routes/bookRoute");
 const studentRoutes = require("./routes/studentRoute");
 const userRoutes = require("./routes/userRoute");
 const mongoose = require("mongoose");
@@ -43,6 +44,7 @@ app.use(
 );
 
 app.use("/", studentRoutes);
+// app.use("/", bookRoutes);
 app.use("/", userRoutes);
 
 // app.get("/books", (req, res, next) => {
