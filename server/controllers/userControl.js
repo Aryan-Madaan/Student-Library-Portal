@@ -28,7 +28,6 @@ module.exports.signin = async (req, res) => {
   await User.findOne({
     email: req.body.email,
   })
-    .exec()
     .then((user) => {
       if (!user) {
         return res.status(404).send({
@@ -55,8 +54,9 @@ module.exports.signin = async (req, res) => {
         {
           expiresIn: 86400,
         }
-      );
+      ); 
 
+      console.log(user)
       //responding to client request with user profile success message and  access token .
       res.status(200).send({
         user: {
@@ -69,6 +69,7 @@ module.exports.signin = async (req, res) => {
       });
     })
     .catch((err) => {
+      
       res.status(500).send({
         message: err,
       });
@@ -76,16 +77,12 @@ module.exports.signin = async (req, res) => {
 };
 
 module.exports.validateJWT = (req, res) => {
-  if (!req.user) {
-    res.status(403).send({
-      message: "Invalid JWT",
-    });
-  }
   if (req.user === "admin") {
     res.status(200).send({
       message: "Welcome",
     });
-  } else {
+  } 
+  else {
     res.status(403).send({
       message: "Unauthorized user",
     });

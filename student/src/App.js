@@ -20,12 +20,14 @@ import View from "./components/View";
 
 import AddStudentPage from "./components/AddStudentPage";
 import Container from "@mui/material/Container";
+import axios from "axios";
 
 // import studentDatabase from "./data/studentDatabase.json";
 
 function App() {
   // implement a loader here
-  const [loading, setLoading] = useState(true);
+  const [auth,setAuth] = useState(true);
+  const [accessToken,setAccessToken] = useState(null)
 
   // const fetchData = useCallback( async () => {
   //   var [mydata,err,error] = await FetchData();
@@ -38,22 +40,62 @@ function App() {
   //   }
   // });
 
-  useEffect(() => {
-    // console.log(data)
-    setTimeout(() => setLoading(false), 3000);
-    // setLoading(false);
-  }, [loading]);
 
+  useEffect(() => {
+    const checkAuth = async ()=>{
+      if (accessToken === null) return setAuth(true);
+      console.log(accessToken)
+      const val = await axios.get(
+        `${process.env.REACT_APP_NAME}/hiddencontent`,{
+          headers:{
+            'Authorization':`JWT ${accessToken}`
+          }
+        }
+      )
+      // console.log(val)
+      if (val.status===200)
+      return setAuth(false);
+      else
+      return setAuth(true);
+      
+    }
+    checkAuth()
+    // console.log(accessToken)
+    // console.log(data)
+    // setTimeout(() => setLoading(false), 3000);
+   
+    // setLoading(false);
+  }, [accessToken]);
+
+  console.log(auth)
+  if(auth)
+  {
+    return   (<div style={{ minHeight: "100vh" }} className="App">
+    <ParticlesBG />
+    <div>
+      {/* <Navbar />  */}
+    </div>
+    <Login  setAccessToken={setAccessToken} />;
+    </div>
+    
+    )
+  }
+
+
+  
+
+
+  // checkAuth()
   return (
     <Router>
       <div style={{ minHeight: "100vh" }} className="App">
         <ParticlesBG />
-
         <div>
           <Navbar />
         </div>
         {false ? (
-          <Loading />
+          // <Navigate to="/login" />
+          <Login  setAccessToken={setAccessToken}/>
         ) : (
           <Routes>
             <Route
@@ -65,11 +107,11 @@ function App() {
               }
             />
             <Route path="/view" element={<View />} />
-            <Route path="/login" element={<Login />} />
+            {/* <Route path="/login" element={<Login  setAccessToken={setAccessToken}/>} /> */}
             <Route path="/update" element={<Update />} />
             <Route path="/add" element={<AddStudentPage />} />
             <Route path="/status" element={<Status />} />
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         )}
       </div>

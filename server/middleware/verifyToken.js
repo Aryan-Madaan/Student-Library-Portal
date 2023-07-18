@@ -1,35 +1,32 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
-module.exports.verifyToken = (req, res, next) => {
+module.exports.verifyToken = async (req, res, next) => {
   if (
     req.headers &&
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "JWT"
   ) {
-    jwt.verify(
+    await jwt.verify(
       req.headers.authorization.split(" ")[1],
       process.env.API_SECRET,
-      (err, decode) => {
-        if (err) {
+      async (err, decode) => {
+        if (err!=null || decode===null) {
           req.user = undefined;
+          req.error = err;
         }
-        User.findOne({
+        else{
+        await User.findOne({
           _id: decode.id,
-        }).exec((err, user) => {
-          if (err) {
-            res.status(500).send({
-              message: err,
-            });
-          } else {
-            req.user = user;
-            next();
-          }
-        });
+        }).then((user) => {
+            req.user = user.role;
+        })
+      }
+        
       }
     );
-  } else {
-    req.user = undefined;
-    next();
+    // next()
   }
+  next()
+  
 };

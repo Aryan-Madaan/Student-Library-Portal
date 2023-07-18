@@ -36,8 +36,8 @@ const theme = createTheme({
   },
 });
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({setAccessToken}) => {
+  // const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const handleLogin = (e) => {
@@ -46,14 +46,17 @@ const Login = () => {
       .post(`${process.env.REACT_APP_NAME}/login`, {
         email: email,
         password: pwd,
-      })
+      },
+      {timeout: 2000,}
+      )
       .then((res) => {
-        console.log(res)
-        navigate("/");
+        // console.log(res.data.accessToken)
+        setAccessToken(res.data.accessToken)
+        // navigate("/");
       })
       .catch((err) => {
-        console.log(err)
-        navigate("/login");
+        // console.log(err)
+        // navigate("/login");
       });
   };
 
